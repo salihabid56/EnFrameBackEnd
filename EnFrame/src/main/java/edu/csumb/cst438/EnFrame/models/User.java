@@ -9,10 +9,10 @@ import io.swagger.annotations.ApiModelProperty;
 public class User {
 
     @Id
-    String email; //unique id
-    String password;
-    String firstName;
-    String lastName;
+   private String email; //unique id
+   private String password;
+   private String firstName;
+   private String lastName;
 
     public User(){
 
@@ -62,14 +62,15 @@ public class User {
     }
 
 
-    public void authUsername(String email, String password)
+    public Boolean authUsername(String email, String password)
     {
         if (this.email.equals(email) && this.password.equals(password))
         {
             System.out.println("Login Successful");
         }
         else{
-            System.out.println("Bad Credentials");
+            System.out.println("Login Failed. Bad Credentials");
         }
+        return this.email.equals(email) && this.password.equals(password);
     }
 }

@@ -3,15 +3,18 @@ package edu.csumb.cst438.EnFrame.controllers;
 import edu.csumb.cst438.EnFrame.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import edu.csumb.cst438.EnFrame.models.User;
 import org.springframework.web.bind.annotation.*;
 
-
+@SpringBootApplication
 @RestController
+@CrossOrigin(origins = "*")
 public class UserController {
     @Autowired
     UserService userService;
+    
     @RequestMapping(method = RequestMethod.POST, value = "/user/addUser")
     @ResponseBody
     public Boolean addUser(@RequestBody User user)
@@ -26,11 +29,18 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+ 
     @RequestMapping(method = RequestMethod.GET, value = "/user/checkCredentials")
     @ResponseBody
-    public void checkCredentials(@RequestParam String email, String password)
+    public Boolean checkCredentials(@RequestParam String email, String password)
+
     {
-        userService.checkCredentials(email, password);
+        try {
+            return(userService.checkCredentials(email, password));
+
+        } catch (Exception e) {
+            return false;
+        }
     }
-    
+
 }

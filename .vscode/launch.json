@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - EnFrameApplication",
+            "request": "launch",
+            "mainClass": "edu.csumb.cst438.EnFrame.EnFrameApplication",
+            "projectName": "EnFrame"
+        }
+    ]
+}

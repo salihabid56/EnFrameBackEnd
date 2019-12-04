@@ -10,19 +10,20 @@ import edu.csumb.cst438.EnFrame.repository.UserRepository;
 public class UserService {
     @Autowired
     UserRepository userRepo;
+    User user;
 
-    public Boolean addUser(User user){
+    public Boolean addUser(User user) {
         return userRepo.insertIfExist(user);
     }
-    public Iterable<User> getAllUsers(){
-        return(userRepo.findAll());
+
+    public Iterable<User> getAllUsers() {
+        return (userRepo.findAll());
     }
 
-    public void checkCredentials(String email, String password){
+    public Boolean checkCredentials(String email, String password){
         User user = userRepo.findById(email).get();
-        user.authUsername(email, password);
-//        userRepository.save(user);
-    }
-
+        assert(user.authUsername(email, password));
+         return user.authUsername(email, password);
+    } 
 
 }
