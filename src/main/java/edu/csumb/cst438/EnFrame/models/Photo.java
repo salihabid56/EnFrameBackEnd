@@ -18,11 +18,10 @@ public class Photo {
 
     // }
 
-    public Photo(String reference, Set<String> tags, String userWhoUploaded, int favorites) {
-        this.reference = reference;
+    public Photo(Set<String> tags, String userWhoUploaded) {
         this.tags = tags;
         this.userWhoUploaded = userWhoUploaded;
-        this.favorites = favorites;
+        this.favorites = 0;
     }
 
     public String getReference() {
