@@ -1,6 +1,8 @@
 package edu.csumb.cst438.EnFrame.models;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.data.annotation.Id;
 
@@ -13,6 +15,7 @@ public class User {
    private String password;
    private String firstName;
    private String lastName;
+   private HashSet<String> favorites;
 
     public User(){
 
@@ -23,6 +26,7 @@ public class User {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.favorites = new HashSet<>();
     }
 
     @ApiModelProperty(required = false, hidden = true)
@@ -59,6 +63,18 @@ public class User {
 
     public void setLastName(String lastName){
         this.lastName = lastName;
+    }
+
+    public Set<String> getFavorites() {
+        return this.favorites;
+    }
+
+    public void setFavorites(HashSet<String> favorites) {
+        this.favorites = favorites;
+    }
+
+    public void addToFavorites(String photoReference) {
+        this.favorites.add(photoReference);
     }
 
 

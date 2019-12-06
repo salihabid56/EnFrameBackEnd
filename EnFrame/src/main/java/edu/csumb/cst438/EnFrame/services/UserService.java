@@ -26,4 +26,9 @@ public class UserService {
          return user.authUsername(email, password);
     } 
 
+    public Iterable<String> getUserFavorites(String email) {
+        User user = userRepo.findById(email).get();
+        return user.getFavorites();
+    }
+
 }

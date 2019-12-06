@@ -43,4 +43,11 @@ public class UserController {
         }
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/user/getUserFavorites")
+    @ResponseBody
+    public Iterable<String>getUserFavorites(@RequestParam String email)
+    {
+        return userService.getUserFavorites(email);
+    }
+
 }
