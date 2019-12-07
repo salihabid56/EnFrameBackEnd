@@ -16,6 +16,7 @@ public class User {
    private String firstName;
    private String lastName;
    private HashSet<String> favorites;
+   private boolean isAdmin;
 
     public User(){
 
@@ -27,6 +28,7 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.favorites = new HashSet<>();
+        this.isAdmin = false;
     }
 
     @ApiModelProperty(required = false, hidden = true)
@@ -71,6 +73,15 @@ public class User {
 
     public void setFavorites(HashSet<String> favorites) {
         this.favorites = favorites;
+    }
+
+    @ApiModelProperty(required = false, hidden = true)
+    public boolean getIsAdmin() {
+        return this.isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     public void addToFavorites(String photoReference) {
