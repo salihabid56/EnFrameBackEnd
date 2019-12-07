@@ -29,6 +29,13 @@ public class PhotoController {
 
     }
 
+    @RequestMapping(method = RequestMethod.DELETE, value = "/photo/deletePhoto")
+    @ResponseBody
+    public Boolean deletePhoto(@RequestParam String reference) {
+        return photoService.deletePhoto(reference);
+
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/photo/getPhotosByTag")
     @ResponseBody
     public Iterable<Photo>getPhotosByTag(@RequestParam String tag)

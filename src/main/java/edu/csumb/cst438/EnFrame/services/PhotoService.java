@@ -32,14 +32,18 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 public class PhotoService {
     @Autowired
     PhotoRepository photoRepo;
-    
-    // public void uploadImage(String objectKey, File image){
-        
-    // }
-    // public void deleteImage(String objectKey){
-    //     s3client.deleteObject("test-bucket438", objectKey);
-    // }
-    // */
+
+     public Boolean deletePhoto(String reference){
+
+        AWSCredentials credentials = new BasicAWSCredentials("AKIAJZXSN226UE22E4IA",
+                "SJhX0wud1FpY54e4KrX3wMsNrIcqAwDC3cypLGyn");
+        AmazonS3 s3client = AmazonS3ClientBuilder.standard()
+                .withCredentials(new AWSStaticCredentialsProvider(credentials)).withRegion(Regions.US_WEST_1).build();
+
+         s3client.deleteObject("test-bucket438", reference);
+         photoRepo.deleteById(reference);
+         return true;
+     }
     public Boolean uploadPhoto(MultipartFile image, String userWhoUpoaded, List<String> tags) throws SdkClientException, AmazonServiceException {
         //Do the stuff to upload photo on Amazon Bucket
         //objectKey is what we will name the file

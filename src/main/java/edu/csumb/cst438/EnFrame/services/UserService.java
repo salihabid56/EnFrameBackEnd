@@ -19,6 +19,11 @@ public class UserService {
         return userRepo.insertIfExist(user);
     }
 
+    public Boolean deleteUser(String email) {
+        userRepo.deleteById(email);
+        return true;
+    }
+
     public Boolean isAdmin(String email) {
         Optional<User> optionalUser =  userRepo.findById(email);
         User user = optionalUser.get();
