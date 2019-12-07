@@ -22,6 +22,13 @@ public class UserController {
         return userService.addUser(user);
     }
 
+    @RequestMapping(method = RequestMethod.DELETE, value = "/user/deleteUser")
+    @ResponseBody
+    public Boolean deleteUser(@RequestParam String email)
+    {
+        return userService.deleteUser(email);
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/user/isAdmin")
     @ResponseBody
     public Boolean isAdmin(@RequestParam String email)
