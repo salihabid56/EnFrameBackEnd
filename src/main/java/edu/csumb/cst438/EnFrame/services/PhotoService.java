@@ -40,7 +40,7 @@ public class PhotoService {
     //     s3client.deleteObject("test-bucket438", objectKey);
     // }
     // */
-    public Boolean uploadPhoto(MultipartFile image, String userWhoUpoaded, List<String> tags) throws SdkClientException, AmazonServiceException {
+    public Boolean uploadPhoto(MultipartFile image) throws SdkClientException, AmazonServiceException {
         //Do the stuff to upload photo on Amazon Bucket
         //objectKey is what we will name the file
         //File image is the image 
@@ -57,11 +57,12 @@ public class PhotoService {
 
         HashSet<String> photoTags = new HashSet<>();
 
-        for (String str : tags) {
-            photoTags.add(str.toLowerCase());
-        }
+        //for (String str : tags) {
+            //photoTags.add(str.toLowerCase());
+        //}
+            photoTags.add("thing");
 
-        Photo photo = new Photo(photoTags, userWhoUpoaded);
+        Photo photo = new Photo(photoTags, "me");
         photoRepo.save(photo);
 
         String photoReference = photo.getReference(); //Use this to make the bucket url
