@@ -92,6 +92,7 @@ public class PhotoService {
     public Iterable<Photo> getPhotosByTag(String tag) {
         List<Photo> allPhotos = photoRepo.findAll();
         ArrayList<Photo> matchedPhotos = new ArrayList<>();
+        tag = tag.trim();
         for (Photo p : allPhotos) {
             if (p.hasTag(tag)) {
                 matchedPhotos.add(p);

@@ -58,6 +58,11 @@ public class Photo {
     }
 
     public boolean hasTag(String tag) {
-        return this.tags.contains(tag);
+        for (String str : this.tags) {
+            if (str.contains(tag)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
