@@ -1,5 +1,8 @@
 package edu.csumb.cst438.EnFrame.services;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,12 @@ public class UserService {
 
     public Boolean addUser(User user) {
         return userRepo.insertIfExist(user);
+    }
+
+    public Boolean isAdmin(String email) {
+        Optional<User> optionalUser =  userRepo.findById(email);
+        User user = optionalUser.get();
+        return user.getIsAdmin();
     }
 
     public Iterable<User> getAllUsers() {
