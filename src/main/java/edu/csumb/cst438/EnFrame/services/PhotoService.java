@@ -76,8 +76,8 @@ public class PhotoService {
             FileOutputStream fos = new FileOutputStream(convFile);
             fos.write(image.getBytes());
             fos.close();
-            s3client.putObject("test-bucket438", "puppy", convFile);
-            //s3client.putObject("test-bucket438", photoReference, convFile); //Use this when you actually want to start uploading to bucket
+            //s3client.putObject("test-bucket438", "puppy", convFile);
+            s3client.putObject("test-bucket438", photoReference, convFile); //Use this when you actually want to start uploading to bucket
         } catch (IOException e){
             return false;
         }
