@@ -22,6 +22,13 @@ public class UserController {
         return userService.addUser(user);
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/user/isAdmin")
+    @ResponseBody
+    public Boolean isAdmin(@RequestParam String email)
+    {
+        return userService.isAdmin(email);
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/user/getAllUsers")
     @ResponseBody
     public Iterable<User>getUsers()
