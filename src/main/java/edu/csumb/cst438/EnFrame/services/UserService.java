@@ -2,6 +2,7 @@ package edu.csumb.cst438.EnFrame.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,14 @@ public class UserService {
     public Iterable<String> getUserFavorites(String email) {
         User user = userRepo.findById(email).get();
         return user.getFavorites();
+    }
+
+    public Boolean addFavorite(String email, String reference) {
+        User user = userRepo.findById(email).get();
+        Set<String> favorites = user.getFavorites();
+        favorites.add(reference);
+        userRepo.save(user);
+        return true;
     }
 
 }
