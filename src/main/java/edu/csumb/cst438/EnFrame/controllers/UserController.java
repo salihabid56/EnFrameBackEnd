@@ -64,4 +64,11 @@ public class UserController {
         return userService.getUserFavorites(email);
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/user/addFavorite")
+    @ResponseBody
+    public Boolean addFavorite(@RequestParam String email, @RequestParam String reference)
+    {
+        return userService.addFavorite(email, reference);
+    }
+
 }
