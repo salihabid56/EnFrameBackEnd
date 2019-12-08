@@ -26,8 +26,7 @@ public class UserService {
     }
 
     public Boolean isAdmin(String email) {
-        Optional<User> optionalUser =  userRepo.findById(email);
-        User user = optionalUser.get();
+        User user = userRepo.findById(email).get();
         return user.getIsAdmin();
     }
 
@@ -51,6 +50,18 @@ public class UserService {
         Set<String> favorites = user.getFavorites();
         favorites.add(reference);
         userRepo.save(user);
+        return true;
+    }
+
+    public Boolean deleteFromAllFavorites(String reference) {
+        List<User> allUsers = userRepo.findAll();
+        for (User user : allUsers) {
+            Set<String> favorites = user.getFavorites();
+            if (favorites.contains(reference)) {
+                favorites.remove(reference);
+                userRepo.save(user);
+            }
+        }
         return true;
     }
 

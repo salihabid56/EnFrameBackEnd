@@ -71,4 +71,10 @@ public class UserController {
         return userService.addFavorite(email, reference);
     }
 
+    @RequestMapping(method = RequestMethod.DELETE, value = "/user/deleteFromAllFavorites")
+    @ResponseBody
+    public Boolean deleteFromAllFavorites(@RequestParam String reference)
+    {
+        return userService.deleteFromAllFavorites(reference);
+    }
 }
