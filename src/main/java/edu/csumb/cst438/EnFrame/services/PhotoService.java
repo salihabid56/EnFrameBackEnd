@@ -89,6 +89,24 @@ public class PhotoService {
         return true;
     }
 
+    public String uploadPhotoAlt(String userWhoUpoaded, List<String> tags) {
+
+        //Make the photo Object to be put in DB
+
+        HashSet<String> photoTags = new HashSet<>();
+
+        for (String str : tags) {
+            photoTags.add(str.toLowerCase());
+        }
+
+        Photo photo = new Photo(photoTags, userWhoUpoaded);
+        photoRepo.save(photo);
+
+        String photoReference = photo.getReference(); //Use this to make the bucket url
+       
+        return photoReference;
+    }
+
     public Iterable<Photo> getPhotosByTag(String tag) {
         List<Photo> allPhotos = photoRepo.findAll();
         ArrayList<Photo> matchedPhotos = new ArrayList<>();

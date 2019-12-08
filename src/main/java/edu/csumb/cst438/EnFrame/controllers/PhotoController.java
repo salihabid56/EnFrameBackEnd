@@ -29,6 +29,13 @@ public class PhotoController {
 
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/photo/uploadPhotoAlt")
+    @ResponseBody
+    public String uploadPhotoAlt(@RequestParam String userWhoUploaded, @RequestParam List<String> tags) {
+        return photoService.uploadPhotoAlt(userWhoUploaded, tags);
+
+    }
+
     @RequestMapping(method = RequestMethod.DELETE, value = "/photo/deletePhoto")
     @ResponseBody
     public Boolean deletePhoto(@RequestParam String reference) {
