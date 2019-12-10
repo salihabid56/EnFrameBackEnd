@@ -32,9 +32,9 @@ public class PhotoController {
 
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/photo/uploadMetadata")
+    @RequestMapping(method = RequestMethod.GET, value = "/photo/uploadMetadata")
     @ResponseBody
-    public Boolean uploadMetadata(@RequestParam String reference, @RequestParam ArrayList<String> tags, @RequestParam String userWhoUploaded) {
+    public Boolean uploadMetadata(@RequestParam String reference, @RequestParam String tags, @RequestParam String userWhoUploaded) {
         return photoService.uploadMetadata(reference, tags, userWhoUploaded);
     }
 

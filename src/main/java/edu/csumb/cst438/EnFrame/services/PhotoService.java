@@ -33,7 +33,9 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 public class PhotoService {
     @Autowired
     PhotoRepository photoRepo;
-
+    public Boolean savePhoto(Photo photo) {
+        return photoRepo.insertIfExist(photo);
+    }
      public Boolean deletePhoto(String reference){
 
         AWSCredentials credentials = new BasicAWSCredentials("AKIAJZXSN226UE22E4IA",
@@ -86,13 +88,11 @@ public class PhotoService {
         return photoReference;
     }
 
-    public Boolean uploadMetadata(String reference, ArrayList<String> tags, String userWhoUploaded) {
+    public Boolean uploadMetadata(String reference, String tags, String userWhoUploaded) {
         Photo photo = photoRepo.findById(reference).get();
         Set<String> photoTags = photo.getTags();
+            photoTags.add(tags);
 
-        for (String tag : tags) {
-            photoTags.add(tag);
-        }
 
         photo.setUserWhoUploaded(userWhoUploaded);
         photoRepo.save(photo);
