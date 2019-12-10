@@ -3,6 +3,7 @@ package edu.csumb.cst438.EnFrame.controllers;
 import edu.csumb.cst438.EnFrame.services.PhotoService;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +22,20 @@ public class PhotoController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/photo/uploadPhoto")
     @ResponseBody
-    public Boolean uploadPhoto(@RequestParam("file") MultipartFile image) throws IOException {
+    public String uploadPhoto(@RequestParam("file") MultipartFile image) throws IOException {
         if(image == null){
-            return false;
+            return "false";
         }
         return photoService.uploadPhoto(image);
 
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/photo/uploadMetadata")
+    @ResponseBody
+    public Boolean uploadMetadata(@RequestParam String reference, @RequestParam ArrayList<String> tags, @RequestParam String userWhoUploaded) {
+        return photoService.uploadMetadata(reference, tags, userWhoUploaded);
+    }
+
 
     @RequestMapping(method = RequestMethod.GET, value = "/photo/uploadPhotoAlt")
     @ResponseBody

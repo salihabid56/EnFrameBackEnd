@@ -1,6 +1,10 @@
-/Users/sal/Desktop/EnFrame/src/main/java/edu/csumb/cst438/EnFrame/config/swagger.java
-/Users/sal/Desktop/EnFrame/src/main/java/edu/csumb/cst438/EnFrame/EnFrameApplication.java
-/Users/sal/Desktop/EnFrame/src/main/java/edu/csumb/cst438/EnFrame/services/UserService.java
-/Users/sal/Desktop/EnFrame/src/main/java/edu/csumb/cst438/EnFrame/repository/UserRepository.java
-/Users/sal/Desktop/EnFrame/src/main/java/edu/csumb/cst438/EnFrame/controllers/UserController.java
-/Users/sal/Desktop/EnFrame/src/main/java/edu/csumb/cst438/EnFrame/models/User.java
+C:\Users\Eric\EnFrameBackEnd\src\main\java\edu\csumb\cst438\EnFrame\services\PhotoService.java
+C:\Users\Eric\EnFrameBackEnd\src\main\java\edu\csumb\cst438\EnFrame\services\UserService.java
+C:\Users\Eric\EnFrameBackEnd\src\main\java\edu\csumb\cst438\EnFrame\config\swagger.java
+C:\Users\Eric\EnFrameBackEnd\src\main\java\edu\csumb\cst438\EnFrame\repository\PhotoRepository.java
+C:\Users\Eric\EnFrameBackEnd\src\main\java\edu\csumb\cst438\EnFrame\repository\UserRepository.java
+C:\Users\Eric\EnFrameBackEnd\src\main\java\edu\csumb\cst438\EnFrame\models\User.java
+C:\Users\Eric\EnFrameBackEnd\src\main\java\edu\csumb\cst438\EnFrame\EnFrameApplication.java
+C:\Users\Eric\EnFrameBackEnd\src\main\java\edu\csumb\cst438\EnFrame\controllers\UserController.java
+C:\Users\Eric\EnFrameBackEnd\src\main\java\edu\csumb\cst438\EnFrame\controllers\PhotoController.java
+C:\Users\Eric\EnFrameBackEnd\src\main\java\edu\csumb\cst438\EnFrame\models\Photo.java
