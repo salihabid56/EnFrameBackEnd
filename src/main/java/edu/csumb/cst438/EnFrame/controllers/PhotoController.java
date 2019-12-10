@@ -4,7 +4,9 @@ import edu.csumb.cst438.EnFrame.services.PhotoService;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,11 +24,11 @@ public class PhotoController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/photo/uploadPhoto")
     @ResponseBody
-    public String uploadPhoto(@RequestParam("file") MultipartFile image) throws IOException {
-        if(image == null){
-            return "false";
-        }
-        return photoService.uploadPhoto(image);
+    public Map<String, String> uploadPhoto(@RequestParam("file") MultipartFile image) throws IOException {
+        // if(image == null){
+        //     return "false";
+        // }
+        return Collections.singletonMap("response", photoService.uploadPhoto(image));
 
     }
 
