@@ -36,7 +36,7 @@ public class PhotoController {
 
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/photo/uploadPhotoAltToo")
+    @RequestMapping(method = RequestMethod.GET, value = "/photo/uploadPhotoAltToo")
     @ResponseBody
     public Boolean uploadPhotoAltToo(@RequestParam String photoUrl) {
         return photoService.uploadPhotoAltToo(photoUrl);

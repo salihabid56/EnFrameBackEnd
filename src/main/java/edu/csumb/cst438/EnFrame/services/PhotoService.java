@@ -16,6 +16,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 
 import org.springframework.stereotype.Service;
@@ -92,30 +93,52 @@ public class PhotoService {
 
     public Boolean uploadPhotoAltToo(String photoUrl) {
 
-
-        //URL url = new URL(photoUrl);
+        URL url;
 
         try {
-            File convFile = new File(photoUrl);
+            url = new URL(photoUrl);
+        } catch (Exception e) {
+            return false;
+        }
+
+        HashSet<String> photoTags = new HashSet<>();
+        photoTags.add("Done");
+
+        Photo photo = new Photo(photoTags, "EricOrozco");
+        photoRepo.save(photo);
+
+        String photoReference = photo.getReference(); //Use this to make the bucket url
+
+        AWSCredentials credentials = new BasicAWSCredentials("AKIAJZXSN226UE22E4IA",
+                "SJhX0wud1FpY54e4KrX3wMsNrIcqAwDC3cypLGyn");
+        AmazonS3 s3client = AmazonS3ClientBuilder.standard()
+                .withCredentials(new AWSStaticCredentialsProvider(credentials)).withRegion(Regions.US_WEST_1).build();
+
+        try {
+            File convFile = new File("image.jpg");
             convFile.createNewFile();
             FileOutputStream fos = new FileOutputStream(convFile);
             //fos.write(url.openStream().
             //fos.write(image.getBytes());
-            //InputStream in = url.openStream();
+            InputStream is = url.openStream();
 
+            byte[] b = new byte[2048];
+            int length;
+
+            while ((length = is.read(b)) != -1) {
+                fos.write(b, 0, length);
+            }
+
+            is.close();
             fos.close();
             //s3client.putObject("test-bucket438", "puppy", convFile);
-            //s3client.putObject("test-bucket438", photoReference, convFile); //Use this when you actually want to start uploading to bucket
+            s3client.putObject("test-bucket438", photoReference, convFile); //Use this when you actually want to start uploading to bucket
         } catch (IOException e){
             return false;
         }
         return true;
 
         /*
-        Photo photo = new Photo(photoTags, userWhoUpoaded);
-        photoRepo.save(photo);
-
-        String photoReference = photo.getReference(); //Use this to make the bucket url
 
         AWSCredentials credentials = new BasicAWSCredentials("AKIAJZXSN226UE22E4IA",
                 "SJhX0wud1FpY54e4KrX3wMsNrIcqAwDC3cypLGyn");
