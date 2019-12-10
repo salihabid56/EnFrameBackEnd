@@ -20,10 +20,6 @@ public class UserService {
         return userRepo.insertIfExist(user);
     }
 
-    public User getUser(String email) {
-        return userRepo.findById(email).get();
-    }
-
     public Boolean deleteUser(String email) {
         userRepo.deleteById(email);
         return true;
