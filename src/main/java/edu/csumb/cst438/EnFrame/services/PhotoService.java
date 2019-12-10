@@ -44,7 +44,7 @@ public class PhotoService {
          photoRepo.deleteById(reference);
          return true;
      }
-    public Boolean uploadPhoto(MultipartFile image, String userWhoUpoaded, List<String> tags) throws SdkClientException, AmazonServiceException {
+    public Boolean uploadPhoto(MultipartFile image) throws SdkClientException, AmazonServiceException {
         //Do the stuff to upload photo on Amazon Bucket
         //objectKey is what we will name the file
         //File image is the image 
@@ -52,23 +52,23 @@ public class PhotoService {
 
         //Make sure it is a correct photo file format
 
-        String contentType = image.getContentType();
-        if (contentType.length() < 5 || !contentType.substring(0,5).equals("image")) {
-            return false;
-        }
+        // String contentType = image.getContentType();
+        // if (contentType.length() < 5 || !contentType.substring(0,5).equals("image")) {
+        //     return false;
+        // }
 
-        //Make the photo Object to be put in DB
+        // //Make the photo Object to be put in DB
 
-        HashSet<String> photoTags = new HashSet<>();
+        // HashSet<String> photoTags = new HashSet<>();
 
-        for (String str : tags) {
-            photoTags.add(str.toLowerCase());
-        }
+        // for (String str : tags) {
+        //     photoTags.add(str.toLowerCase());
+        // }
 
-        Photo photo = new Photo(photoTags, userWhoUpoaded);
-        photoRepo.save(photo);
+        // Photo photo = new Photo(photoTags, userWhoUpoaded);
+        // photoRepo.save(photo);
 
-        String photoReference = photo.getReference(); //Use this to make the bucket url
+        // String photoReference = photo.getReference(); //Use this to make the bucket url
 
         AWSCredentials credentials = new BasicAWSCredentials("AKIAJZXSN226UE22E4IA",
                 "SJhX0wud1FpY54e4KrX3wMsNrIcqAwDC3cypLGyn");
@@ -81,7 +81,7 @@ public class PhotoService {
             fos.write(image.getBytes());
             fos.close();
             //s3client.putObject("test-bucket438", "puppy", convFile);
-            s3client.putObject("test-bucket438", photoReference, convFile); //Use this when you actually want to start uploading to bucket
+            s3client.putObject("test-bucket438", "photoReference", convFile); //Use this when you actually want to start uploading to bucket
         } catch (IOException e){
             return false;
         }
