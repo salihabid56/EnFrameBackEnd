@@ -21,11 +21,11 @@ public class PhotoController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/photo/uploadPhoto")
     @ResponseBody
-    public Boolean uploadPhoto(@RequestPart(value = "file") MultipartFile image, @RequestParam String userWhoUploaded, @RequestParam List<String> tags) throws IOException {
+    public Boolean uploadPhoto(@RequestParam(value = "file") MultipartFile image) throws IOException {
         if(image == null){
             return false;
         }
-        return photoService.uploadPhoto(image, userWhoUploaded, tags);
+        return photoService.uploadPhoto(image);
 
     }
 

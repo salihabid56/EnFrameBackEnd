@@ -27,6 +27,7 @@ import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Regions;
+import com.amazonaws.services.appstream.model.Image;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 
@@ -46,7 +47,7 @@ public class PhotoService {
          photoRepo.deleteById(reference);
          return true;
      }
-    public Boolean uploadPhoto(MultipartFile image, String userWhoUpoaded, List<String> tags) throws SdkClientException, AmazonServiceException {
+    public Boolean uploadPhoto(MultipartFile image) throws SdkClientException, AmazonServiceException {
         //Do the stuff to upload photo on Amazon Bucket
         //objectKey is what we will name the file
         //File image is the image 
@@ -63,11 +64,14 @@ public class PhotoService {
 
         HashSet<String> photoTags = new HashSet<>();
 
+        List<String> tags = new ArrayList<>();
+
         for (String str : tags) {
             photoTags.add(str.toLowerCase());
         }
+        String userWhoUploaded = "mee";
 
-        Photo photo = new Photo(photoTags, userWhoUpoaded);
+        Photo photo = new Photo(photoTags, userWhoUploaded);
         photoRepo.save(photo);
 
         String photoReference = photo.getReference(); //Use this to make the bucket url
