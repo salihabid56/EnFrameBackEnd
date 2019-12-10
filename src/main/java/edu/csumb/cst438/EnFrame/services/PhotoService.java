@@ -16,6 +16,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
 import org.springframework.stereotype.Service;
 
@@ -87,6 +88,53 @@ public class PhotoService {
         }
        
         return true;
+    }
+
+    public Boolean uploadPhotoAltToo(String photoUrl) {
+
+
+        //URL url = new URL(photoUrl);
+
+        try {
+            File convFile = new File(photoUrl);
+            convFile.createNewFile();
+            FileOutputStream fos = new FileOutputStream(convFile);
+            //fos.write(url.openStream().
+            //fos.write(image.getBytes());
+            //InputStream in = url.openStream();
+
+            fos.close();
+            //s3client.putObject("test-bucket438", "puppy", convFile);
+            //s3client.putObject("test-bucket438", photoReference, convFile); //Use this when you actually want to start uploading to bucket
+        } catch (IOException e){
+            return false;
+        }
+        return true;
+
+        /*
+        Photo photo = new Photo(photoTags, userWhoUpoaded);
+        photoRepo.save(photo);
+
+        String photoReference = photo.getReference(); //Use this to make the bucket url
+
+        AWSCredentials credentials = new BasicAWSCredentials("AKIAJZXSN226UE22E4IA",
+                "SJhX0wud1FpY54e4KrX3wMsNrIcqAwDC3cypLGyn");
+        AmazonS3 s3client = AmazonS3ClientBuilder.standard()
+                .withCredentials(new AWSStaticCredentialsProvider(credentials)).withRegion(Regions.US_WEST_1).build();
+        try {
+            File convFile = new File(image.getOriginalFilename());
+            convFile.createNewFile();
+            FileOutputStream fos = new FileOutputStream(convFile);
+            fos.write(image.getBytes());
+            fos.close();
+            //s3client.putObject("test-bucket438", "puppy", convFile);
+            s3client.putObject("test-bucket438", photoReference, convFile); //Use this when you actually want to start uploading to bucket
+        } catch (IOException e){
+            return false;
+        }
+       
+        return true;
+        */
     }
 
     public String uploadPhotoAlt(String userWhoUpoaded, List<String> tags) {

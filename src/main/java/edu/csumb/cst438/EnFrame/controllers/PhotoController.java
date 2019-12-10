@@ -36,6 +36,13 @@ public class PhotoController {
 
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/photo/uploadPhotoAltToo")
+    @ResponseBody
+    public Boolean uploadPhotoAltToo(@RequestParam String photoUrl) {
+        return photoService.uploadPhotoAltToo(photoUrl);
+
+    }
+
     @RequestMapping(method = RequestMethod.DELETE, value = "/photo/deletePhoto")
     @ResponseBody
     public Boolean deletePhoto(@RequestParam String reference) {
