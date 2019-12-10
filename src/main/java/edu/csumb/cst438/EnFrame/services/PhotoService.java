@@ -3,6 +3,7 @@ package edu.csumb.cst438.EnFrame.services;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,7 +45,7 @@ public class PhotoService {
          photoRepo.deleteById(reference);
          return true;
      }
-    public Boolean uploadPhoto(MultipartFile image) throws SdkClientException, AmazonServiceException {
+    public String uploadPhoto(MultipartFile image) throws SdkClientException, AmazonServiceException {
         //Do the stuff to upload photo on Amazon Bucket
         //objectKey is what we will name the file
         //File image is the image 
@@ -52,23 +53,19 @@ public class PhotoService {
 
         //Make sure it is a correct photo file format
 
-        // String contentType = image.getContentType();
-        // if (contentType.length() < 5 || !contentType.substring(0,5).equals("image")) {
-        //     return false;
-        // }
+        String contentType = image.getContentType();
+        if (contentType.length() < 5 || !contentType.substring(0,5).equals("image")) {
+            return "false";
+        }
 
         // //Make the photo Object to be put in DB
 
-        // HashSet<String> photoTags = new HashSet<>();
+        HashSet<String> photoTags = new HashSet<>();
 
-        // for (String str : tags) {
-        //     photoTags.add(str.toLowerCase());
-        // }
+        Photo photo = new Photo(photoTags, "Error: Not Set Yet");
+        photoRepo.save(photo);
 
-        // Photo photo = new Photo(photoTags, userWhoUpoaded);
-        // photoRepo.save(photo);
-
-        // String photoReference = photo.getReference(); //Use this to make the bucket url
+        String photoReference = photo.getReference(); //Use this to make the bucket url
 
         AWSCredentials credentials = new BasicAWSCredentials("AKIAJZXSN226UE22E4IA",
                 "SJhX0wud1FpY54e4KrX3wMsNrIcqAwDC3cypLGyn");
@@ -81,11 +78,24 @@ public class PhotoService {
             fos.write(image.getBytes());
             fos.close();
             //s3client.putObject("test-bucket438", "puppy", convFile);
-            s3client.putObject("test-bucket438", "photoReference", convFile); //Use this when you actually want to start uploading to bucket
+            s3client.putObject("test-bucket438", photoReference, convFile); //Use this when you actually want to start uploading to bucket
         } catch (IOException e){
-            return false;
+            return "false";
         }
        
+        return photoReference;
+    }
+
+    public Boolean uploadMetadata(String reference, ArrayList<String> tags, String userWhoUploaded) {
+        Photo photo = photoRepo.findById(reference).get();
+        Set<String> photoTags = photo.getTags();
+
+        for (String tag : tags) {
+            photoTags.add(tag);
+        }
+
+        photo.setUserWhoUploaded(userWhoUploaded);
+        photoRepo.save(photo);
         return true;
     }
 
