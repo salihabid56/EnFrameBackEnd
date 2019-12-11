@@ -18,6 +18,7 @@ public class UserService {
     User user;
 
     public Boolean addUser(User user) {
+        user.setFavorites(new HashSet<String>());
         return userRepo.insertIfExist(user);
     }
 
