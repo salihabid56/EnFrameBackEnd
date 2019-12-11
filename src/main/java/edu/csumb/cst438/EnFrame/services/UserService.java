@@ -1,5 +1,6 @@
 package edu.csumb.cst438.EnFrame.services;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -52,7 +53,11 @@ public class UserService {
     public Boolean addFavorite(String email, String reference) {
         User user = userRepo.findById(email).get();
         Set<String> favorites = user.getFavorites();
+        if (favorites == null) {
+            favorites = new HashSet<String>();
+        }
         favorites.add(reference);
+        user.setFavorites(favorites);
         userRepo.save(user);
         return true;
     }

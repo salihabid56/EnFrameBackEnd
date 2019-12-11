@@ -15,7 +15,7 @@ public class User {
    private String password;
    private String firstName;
    private String lastName;
-   private HashSet<String> favorites;
+   private Set<String> favorites;
    private boolean isAdmin;
 
     public User(){
@@ -71,7 +71,7 @@ public class User {
         return this.favorites;
     }
 
-    public void setFavorites(HashSet<String> favorites) {
+    public void setFavorites(Set<String> favorites) {
         this.favorites = favorites;
     }
 
